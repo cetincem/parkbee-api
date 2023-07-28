@@ -19,9 +19,7 @@ class UsersService extends BaseService {
     const url = `${this.apiUrl}/external_users`;
 
     try {
-      const response: AxiosResponse = await axios.post(url, params, {
-        headers: this.createHeaders()
-      });
+      const response: AxiosResponse = await this.sendPostRequest(url, params);
       return response.data as CreateUserResponse;
     } catch (err: any) {
       throw this.handleError(err);
