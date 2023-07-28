@@ -39,6 +39,22 @@ class BaseService {
     if (headers) config.headers = { ...config.headers, ...headers };
     return axios.post(url, data, config);
   }
+
+  sendPutRequest(url: string, data: any, headers?: any) {
+    const config = {
+      headers: this.createHeaders(),
+    };
+    if (headers) config.headers = { ...config.headers, ...headers };
+    return axios.put(url, data, config);
+  }
+
+  sendDeleteRequest(url: string, data?: any, headers?: any) {
+    const config = {
+      headers: this.createHeaders(),
+    };
+    if (headers) config.headers = { ...config.headers, ...headers };
+    return axios.delete(url, data);
+  }
 }
 
 export default BaseService;
