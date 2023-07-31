@@ -32,7 +32,7 @@ class BaseService {
     return axios.get(url, config);
   };
 
-  sendPostRequest(url: string, data: any, headers?: any) {
+  sendPostRequest(url: string, data?: any, headers?: any) {
     const config = {
       headers: this.createHeaders(),
     };
