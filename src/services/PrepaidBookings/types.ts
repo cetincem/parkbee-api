@@ -25,7 +25,7 @@ export interface CreatePrepaidBookingResponse {
   accessSlots: AccessSlotResponse[]; // a list of available doors for the garage
   totalAmount: number; // total amount to pay
   paymentUrl: string; // url to redirect to after payment
-};
+}
 
 export enum BookingStatus {
   "pending",
@@ -33,7 +33,7 @@ export enum BookingStatus {
   "confirmed",
   "cancelled",
   "overstayed",
-};
+}
 
 export interface GetBookingDetailsResponse {
   bookingId: string; // unique id of the booking (Guid)
@@ -45,17 +45,29 @@ export interface GetBookingDetailsResponse {
   TotalAmount: number; // double
   OverstayAmount: number; // double
   accessSlots: AccessSlotResponse[];
-};
+}
 
 export enum ReasonCode {
   "Theft",
   "Damage",
   "Cancellation",
   "Other",
-};
+}
 
 export interface RefundBookingParams {
   Amount: number; // decimal
   Reason: string;
   ReasonCode: ReasonCode;
+}
+
+export interface StartParkingActionParams {
+  doorId: string;
+}
+
+export interface StopParkingActionParams {
+  doorId: string;
+}
+
+export interface CreateOverstayRecordParams {
+  redirectUrl?: string;
 }

@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import BaseService from "../Base";
-import { CreatePrepaidBookingParams, CreatePrepaidBookingResponse, GetBookingDetailsResponse, RefundBookingParams } from "./types";
+import { CreateOverstayRecordParams, CreatePrepaidBookingParams, CreatePrepaidBookingResponse, GetBookingDetailsResponse, RefundBookingParams, StartParkingActionParams, StopParkingActionParams } from "./types";
 
 class PrepaidBookingsService extends BaseService {
   async createBooking(params: CreatePrepaidBookingParams): Promise<CreatePrepaidBookingResponse> {
@@ -46,6 +46,51 @@ class PrepaidBookingsService extends BaseService {
     const url = `${this.apiUrl}/bookings/${bookingId}/refund`;
     try {
       await this.sendPostRequest(url, params);
+    } catch (err) {
+      throw this.handleError(err);
+    }
+  }
+
+  async startParkingAction(bookingId: string, accessSlotId: string, params: StartParkingActionParams) {
+    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/start`;
+    try {
+      await this.sendPostRequest(url, params);
+    } catch (err) {
+      throw this.handleError(err);
+    }
+  }
+
+  async stopParkingAction(bookingId: string, accessSlotId: string, params: StopParkingActionParams) {
+    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/stop`;
+    try {
+      await this.sendPostRequest(url, params);
+    } catch (err) {
+      throw this.handleError(err);
+    }
+  }
+
+  async openPedestrianDoor(bookingId: string, accessSlotId: string, doorId: string) {
+    const url = `${this.apiUrl}/bookings/${bookingId}/pedestrian_door/${doorId}`;
+    try {
+      await this.sendPostRequest(url);
+    } catch (err) {
+      throw this.handleError(err);
+    }
+  }
+
+  async createOverstayRecord(bookingId: string, params: CreateOverstayRecordParams) {
+    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays`;
+    try {
+      await this.sendPostRequest(url, params);
+    } catch (err) {
+      throw this.handleError(err);
+    }
+  }
+
+  async confirmOverstayRecord(bookingId: string, accessSlotId: string, overstayId: string) {
+    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays/${overstayId}/confirm`;
+    try {
+      await this.sendPostRequest(url);
     } catch (err) {
       throw this.handleError(err);
     }
