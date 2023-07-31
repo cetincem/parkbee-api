@@ -1,3 +1,5 @@
+import { BookingStatus, RefundReasonCode } from "../../common/types";
+
 export interface AccessSlotRequest {
   entryTime: string; // time in utc to entry the garage
   exitTime: string; // time in utc to exit the garage
@@ -27,14 +29,6 @@ export interface CreatePrepaidBookingResponse {
   paymentUrl: string; // url to redirect to after payment
 }
 
-export enum BookingStatus {
-  "pending",
-  "expired",
-  "confirmed",
-  "cancelled",
-  "overstayed",
-}
-
 export interface GetBookingDetailsResponse {
   bookingId: string; // unique id of the booking (Guid)
   UserId: string;
@@ -47,17 +41,10 @@ export interface GetBookingDetailsResponse {
   accessSlots: AccessSlotResponse[];
 }
 
-export enum ReasonCode {
-  "Theft",
-  "Damage",
-  "Cancellation",
-  "Other",
-}
-
 export interface RefundBookingParams {
   Amount: number; // decimal
   Reason: string;
-  ReasonCode: ReasonCode;
+  ReasonCode: RefundReasonCode;
 }
 
 export interface StartParkingActionParams {
