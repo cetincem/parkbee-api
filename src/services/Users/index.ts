@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 import { CreateUserParams, CreateUserResponse, SearchUsersParams, SearchUsersResponse } from "./types";
-import BaseService from "../_Base";
+import BaseService from "../Base";
 
 class UsersService extends BaseService {
 
