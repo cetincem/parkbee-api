@@ -27,7 +27,9 @@ There are three main classes that can be used to interact with the ParkBee API:
 After you have received an access token, you can create an instance of each service and use it to interact with the API.
 
 ```js
-// create a new instance of the garages service with the API URL based on the environment you are using and the access token you received from the authentication service.
+// create a new instance of the garages service with the API URL
+// based on the environment you are using and the access token you
+// received from the authentication service.
 const garagesService: GaragesService = new GaragesService("apiUrl", "accessToken");
 
 // call the getGarages method to get a list of garages
