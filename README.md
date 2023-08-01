@@ -1,5 +1,5 @@
 # ParkBee API Client
-A client to interact with the ParkBee API.
+A client to interact with the ParkBee API written in TypeScript.
 
 ## Authentication
 To use the ParkBee API, you need to request an access token from the authentication service.
