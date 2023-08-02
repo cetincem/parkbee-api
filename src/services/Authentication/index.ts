@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import querystring from 'querystring';
+const querystring = require('querystring');
 
 import { RequestAccessTokenParams, RequestAccessTokenResponse } from "./types";
 
