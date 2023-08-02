@@ -34,3 +34,5 @@ class PayPerMinuteParkingService extends BaseService {
     }
   }
 }
+
+export default PayPerMinuteParkingService;
