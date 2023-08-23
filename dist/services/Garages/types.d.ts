@@ -193,7 +193,4 @@ export interface GarageDoor {
     longitude: number;
 }
 export type GetGarageDoorsResponse = GarageDoor[];
-export interface OpenGarageDoorResponse {
-    RegistrationNumber: string;
-}
 export {};

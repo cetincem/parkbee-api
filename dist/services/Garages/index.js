@@ -119,12 +119,11 @@ class GaragesService extends Base_1.default {
             }
         });
     }
-    openGarageDoor(garageId, doorId) {
+    openGarageDoor(garageId, doorId, registrationNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.apiUrl}/garages/${garageId}/doors/${doorId}/open`;
             try {
-                const response = yield this.sendPostRequest(url);
-                return response.data;
+                yield this.sendPostRequest(url, { registrationNumber });
             }
             catch (err) {
                 throw this.handleError(err);

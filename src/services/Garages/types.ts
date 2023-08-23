@@ -194,7 +194,11 @@ export interface LongTermPricingScheme {
   schedule: LongTermSchedule[];
 }
 
-export type GetGaragePricingSchemeResponse = StandardPricingScheme | RushHourPricingScheme | TimeBlockingPricingScheme | LongTermPricingScheme;
+export type GetGaragePricingSchemeResponse =
+  | StandardPricingScheme
+  | RushHourPricingScheme
+  | TimeBlockingPricingScheme
+  | LongTermPricingScheme;
 
 export interface CalculatePriceParams {
   StartTime: string;
@@ -211,7 +215,7 @@ export interface CalculatePriceResponse {
 enum DoorType {
   Human = "Human",
   Entry = "Entry",
-  Exit = "Exit"
+  Exit = "Exit",
 }
 
 export interface GarageDoor {
@@ -223,7 +227,3 @@ export interface GarageDoor {
 }
 
 export type GetGarageDoorsResponse = GarageDoor[];
-
-export interface OpenGarageDoorResponse {
-  RegistrationNumber: string;
-}

@@ -1,5 +1,5 @@
 import BaseService from "../Base";
-import { GetGarageAmenitiesResponse, GetGarageDetailsResponse, GetGarageOpeningHoursResponse, GetGaragesListItem, GetGarageAvailabilityParams, GetGarageAvailabilityResponse, getGaragesAvailabilityParams, GetGaragesAvailabilityResponse, GetGaragePricingSchemeResponse, CalculatePriceResponse, CalculatePriceParams, GetGarageDoorsResponse, OpenGarageDoorResponse } from "./types";
+import { GetGarageAmenitiesResponse, GetGarageDetailsResponse, GetGarageOpeningHoursResponse, GetGaragesListItem, GetGarageAvailabilityParams, GetGarageAvailabilityResponse, getGaragesAvailabilityParams, GetGaragesAvailabilityResponse, GetGaragePricingSchemeResponse, CalculatePriceResponse, CalculatePriceParams, GetGarageDoorsResponse } from "./types";
 declare class GaragesService extends BaseService {
     getGaragesList(params?: GetGaragesListItem): Promise<GetGaragesListItem[]>;
     getGarageDetails(garageId: string): Promise<GetGarageDetailsResponse>;
@@ -10,6 +10,6 @@ declare class GaragesService extends BaseService {
     getGaragePricingScheme(garageId: string): Promise<GetGaragePricingSchemeResponse>;
     calculatePrice(garageId: string, params: CalculatePriceParams): Promise<CalculatePriceResponse>;
     getGarageDoors(garageId: string): Promise<GetGarageDoorsResponse>;
-    openGarageDoor(garageId: string, doorId: string): Promise<OpenGarageDoorResponse>;
+    openGarageDoor(garageId: string, doorId: string, registrationNumber: string): Promise<void>;
 }
 export default GaragesService;
