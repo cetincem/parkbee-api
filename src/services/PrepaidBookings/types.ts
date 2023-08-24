@@ -6,13 +6,13 @@ export interface AccessSlotRequest {
   garageId: string; // the unique id of the garage (Guid)
   registrationNumber: string; // the registration number of the vehicle
   discountCode?: string; // the discount code to apply to the booking
-};
+}
 
 export interface CreatePrepaidBookingParams {
   userId: string;
   accessSlots: AccessSlotRequest[];
   redirectUrl?: string;
-};
+}
 
 export interface AccessSlotResponse {
   accessSlotId: string; // unique id of the access slot (Guid)
@@ -57,4 +57,17 @@ export interface StopParkingActionParams {
 
 export interface CreateOverstayRecordParams {
   redirectUrl?: string;
+}
+
+export interface CalculatePriceParams {
+  garageId: string;
+  discountCode: string;
+  startAt: string;
+  endAt: string;
+}
+
+export interface CalculatePriceResponse {
+  cost: number;
+  discountAmount: number;
+  total: number;
 }

@@ -1,10 +1,22 @@
 import { AxiosResponse } from "axios";
 
 import BaseService from "../Base";
-import { CreateOverstayRecordParams, CreatePrepaidBookingParams, CreatePrepaidBookingResponse, GetBookingDetailsResponse, RefundBookingParams, StartParkingActionParams, StopParkingActionParams } from "./types";
+import {
+  CreateOverstayRecordParams,
+  CreatePrepaidBookingParams,
+  CreatePrepaidBookingResponse,
+  GetBookingDetailsResponse,
+  RefundBookingParams,
+  StartParkingActionParams,
+  StopParkingActionParams,
+  CalculatePriceParams,
+  CalculatePriceResponse,
+} from "./types";
 
 class PrepaidBookingsService extends BaseService {
-  async createBooking(params: CreatePrepaidBookingParams): Promise<CreatePrepaidBookingResponse> {
+  async createBooking(
+    params: CreatePrepaidBookingParams
+  ): Promise<CreatePrepaidBookingResponse> {
     const url = `${this.apiUrl}/bookings`;
     try {
       const response: AxiosResponse = await this.sendPostRequest(url, params);
@@ -23,7 +35,9 @@ class PrepaidBookingsService extends BaseService {
     }
   }
 
-  async getBookingDetails(bookingId: string): Promise<GetBookingDetailsResponse> {
+  async getBookingDetails(
+    bookingId: string
+  ): Promise<GetBookingDetailsResponse> {
     const url = `${this.apiUrl}/bookings/${bookingId}`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url);
@@ -51,7 +65,11 @@ class PrepaidBookingsService extends BaseService {
     }
   }
 
-  async startParkingAction(bookingId: string, accessSlotId: string, params: StartParkingActionParams) {
+  async startParkingAction(
+    bookingId: string,
+    accessSlotId: string,
+    params: StartParkingActionParams
+  ) {
     const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/start`;
     try {
       await this.sendPostRequest(url, params);
@@ -60,7 +78,11 @@ class PrepaidBookingsService extends BaseService {
     }
   }
 
-  async stopParkingAction(bookingId: string, accessSlotId: string, params: StopParkingActionParams) {
+  async stopParkingAction(
+    bookingId: string,
+    accessSlotId: string,
+    params: StopParkingActionParams
+  ) {
     const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/stop`;
     try {
       await this.sendPostRequest(url, params);
@@ -69,7 +91,11 @@ class PrepaidBookingsService extends BaseService {
     }
   }
 
-  async openPedestrianDoor(bookingId: string, accessSlotId: string, doorId: string) {
+  async openPedestrianDoor(
+    bookingId: string,
+    accessSlotId: string,
+    doorId: string
+  ) {
     const url = `${this.apiUrl}/bookings/${bookingId}/pedestrian_door/${doorId}`;
     try {
       await this.sendPostRequest(url);
@@ -78,7 +104,10 @@ class PrepaidBookingsService extends BaseService {
     }
   }
 
-  async createOverstayRecord(bookingId: string, params: CreateOverstayRecordParams) {
+  async createOverstayRecord(
+    bookingId: string,
+    params: CreateOverstayRecordParams
+  ) {
     const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays`;
     try {
       await this.sendPostRequest(url, params);
@@ -87,10 +116,28 @@ class PrepaidBookingsService extends BaseService {
     }
   }
 
-  async confirmOverstayRecord(bookingId: string, accessSlotId: string, overstayId: string) {
+  async confirmOverstayRecord(
+    bookingId: string,
+    accessSlotId: string,
+    overstayId: string
+  ) {
     const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays/${overstayId}/confirm`;
     try {
       await this.sendPostRequest(url);
+    } catch (err) {
+      throw this.handleError(err);
+    }
+  }
+
+  async calculatePrice(
+    params: CalculatePriceParams
+  ): Promise<CalculatePriceResponse> {
+    const { garageId, ...otherParams } = params;
+
+    const url = `${this.apiUrl}/garages/${garageId}/pricing/calculate`;
+    try {
+      const response = await this.sendPostRequest(url, otherParams);
+      return response.data as CalculatePriceResponse;
     } catch (err) {
       throw this.handleError(err);
     }
