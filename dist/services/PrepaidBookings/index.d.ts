@@ -1,5 +1,5 @@
 import BaseService from "../Base";
-import { CreateOverstayRecordParams, CreatePrepaidBookingParams, CreatePrepaidBookingResponse, GetBookingDetailsResponse, RefundBookingParams, StartParkingActionParams, StopParkingActionParams } from "./types";
+import { CreateOverstayRecordParams, CreatePrepaidBookingParams, CreatePrepaidBookingResponse, GetBookingDetailsResponse, RefundBookingParams, StartParkingActionParams, StopParkingActionParams, CalculatePriceParams, CalculatePriceResponse } from "./types";
 declare class PrepaidBookingsService extends BaseService {
     createBooking(params: CreatePrepaidBookingParams): Promise<CreatePrepaidBookingResponse>;
     confirmBooking(bookingId: string, paymentToken: string): Promise<void>;
@@ -11,5 +11,6 @@ declare class PrepaidBookingsService extends BaseService {
     openPedestrianDoor(bookingId: string, accessSlotId: string, doorId: string): Promise<void>;
     createOverstayRecord(bookingId: string, params: CreateOverstayRecordParams): Promise<void>;
     confirmOverstayRecord(bookingId: string, accessSlotId: string, overstayId: string): Promise<void>;
+    calculatePrice(params: CalculatePriceParams): Promise<CalculatePriceResponse>;
 }
 export default PrepaidBookingsService;
