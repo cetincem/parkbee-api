@@ -4,7 +4,7 @@ declare class PrepaidBookingsService extends BaseService {
     createBooking(params: CreatePrepaidBookingParams): Promise<CreatePrepaidBookingResponse>;
     confirmBooking(bookingId: string, paymentToken: string): Promise<void>;
     getBookingDetails(bookingId: string): Promise<GetBookingDetailsResponse>;
-    cancelBooking(bookingId: string): Promise<void>;
+    cancelBooking(bookingId: string): Promise<unknown>;
     refundBooking(bookingId: string, params: RefundBookingParams): Promise<void>;
     startParkingAction(bookingId: string, accessSlotId: string, params: StartParkingActionParams): Promise<void>;
     stopParkingAction(bookingId: string, accessSlotId: string, params: StopParkingActionParams): Promise<void>;

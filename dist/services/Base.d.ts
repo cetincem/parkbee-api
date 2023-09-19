@@ -6,7 +6,7 @@ declare class BaseService {
         Authorization: string;
         'Content-Type': string;
     };
-    handleError(err: any): unknown;
+    handleError(err: any): any;
     sendGetRequest(url: string, query?: any, headers?: any): Promise<import("axios").AxiosResponse<any, any>>;
     sendPostRequest(url: string, data?: any, headers?: any): Promise<import("axios").AxiosResponse<any, any>>;
     sendPutRequest(url: string, data: any, headers?: any): Promise<import("axios").AxiosResponse<any, any>>;

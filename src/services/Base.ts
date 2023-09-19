@@ -20,7 +20,9 @@ class BaseService {
     if (axios.isAxiosError(err)) {
       const error = err as AxiosError;
       return error.response?.data;
-    } else return new Error('Request failed');
+    } else {
+      return err;
+    }
   }
 
   sendGetRequest(url: string, query?: any, headers?: any) {

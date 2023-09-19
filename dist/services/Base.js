@@ -18,8 +18,9 @@ class BaseService {
             const error = err;
             return (_a = error.response) === null || _a === void 0 ? void 0 : _a.data;
         }
-        else
-            return new Error('Request failed');
+        else {
+            return err;
+        }
     }
     sendGetRequest(url, query, headers) {
         const config = {

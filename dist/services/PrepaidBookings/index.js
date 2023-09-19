@@ -61,9 +61,10 @@ class PrepaidBookingsService extends Base_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.apiUrl}/bookings/${bookingId}`;
             try {
-                yield this.sendDeleteRequest(url);
+                return yield this.sendDeleteRequest(url);
             }
             catch (err) {
+                return err;
                 throw this.handleError(err);
             }
         });
