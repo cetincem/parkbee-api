@@ -52,8 +52,8 @@ export interface CreateOverstayRecordParams {
 export interface CalculatePriceParams {
     garageId: string;
     discountCode?: string;
-    startAt: string;
-    endAt: string;
+    startTime: string;
+    endTime: string;
 }
 export interface CalculatePriceResponse {
     cost: number;
