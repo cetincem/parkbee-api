@@ -137,7 +137,7 @@ class PrepaidBookingsService extends BaseService {
     const url = `${this.apiUrl}/garages/${garageId}/pricing/calculate`;
     try {
       const response = await this.sendPostRequest(url, otherParams);
-      return response.data as CalculatePriceResponse;
+      return response as any
     } catch (err) {
       throw this.handleError(err);
     }
