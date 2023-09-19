@@ -140,7 +140,7 @@ class PrepaidBookingsService extends Base_1.default {
             const url = `${this.apiUrl}/garages/${garageId}/pricing/calculate`;
             try {
                 const response = yield this.sendPostRequest(url, otherParams);
-                return response;
+                return response.data;
             }
             catch (err) {
                 throw this.handleError(err);
