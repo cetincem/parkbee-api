@@ -61,10 +61,9 @@ class PrepaidBookingsService extends Base_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.apiUrl}/bookings/${bookingId}`;
             try {
-                return yield this.sendDeleteRequest(url);
+                yield this.sendDeleteRequest(url);
             }
             catch (err) {
-                return err;
                 throw this.handleError(err);
             }
         });
@@ -117,7 +116,8 @@ class PrepaidBookingsService extends Base_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays`;
             try {
-                yield this.sendPostRequest(url, params);
+                const res = yield this.sendPostRequest(url, params);
+                return res.data;
             }
             catch (err) {
                 throw this.handleError(err);

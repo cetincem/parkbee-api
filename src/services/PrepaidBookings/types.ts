@@ -59,6 +59,12 @@ export interface CreateOverstayRecordParams {
   redirectUrl?: string;
 }
 
+export interface CreateOverstayRecordResponse {
+  overstayId: string;
+  amount: number;
+  paymentUrl: string;
+}
+
 export interface CalculatePriceParams {
   garageId: string;
   discountCode?: string;

@@ -20,7 +20,7 @@ class UsersService extends BaseService {
 
     try {
       const response: AxiosResponse = await this.sendPostRequest(url, params);
-      return response.data as CreateUserResponse;
+      return response.data as CreateUserResponse
     } catch (err: any) {
       throw this.handleError(err);
     }

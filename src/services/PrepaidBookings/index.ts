@@ -11,6 +11,7 @@ import {
   StopParkingActionParams,
   CalculatePriceParams,
   CalculatePriceResponse,
+  CreateOverstayRecordResponse,
 } from "./types";
 
 class PrepaidBookingsService extends BaseService {
@@ -106,11 +107,12 @@ class PrepaidBookingsService extends BaseService {
 
   async createOverstayRecord(
     bookingId: string,
-    params: CreateOverstayRecordParams
-  ) {
+    params?: CreateOverstayRecordParams
+  ): Promise<CreateOverstayRecordResponse> {
     const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays`;
     try {
-      await this.sendPostRequest(url, params);
+      const res = await this.sendPostRequest(url, params);
+      return res.data as CreateOverstayRecordResponse;
     } catch (err) {
       throw this.handleError(err);
     }
