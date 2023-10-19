@@ -13,10 +13,9 @@ class BaseService {
         };
     }
     handleError(err) {
-        var _a;
         if (axios_1.default.isAxiosError(err)) {
             const error = err;
-            return (_a = error.response) === null || _a === void 0 ? void 0 : _a.data;
+            return error;
         }
         else {
             return err;

@@ -1,6 +1,6 @@
 {
   "name": "@VICKY-Parking/parkbee-api",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "repository": "git@github.com:VICKY-Parking/parkbee-api.git",
   "description": "ParkBee API for Node.js",
   "main": "dist/index.js",

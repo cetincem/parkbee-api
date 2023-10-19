@@ -19,7 +19,7 @@ class BaseService {
   handleError(err: any) {
     if (axios.isAxiosError(err)) {
       const error = err as AxiosError;
-      return error.response?.data;
+      return error;
     } else {
       return err;
     }
@@ -55,7 +55,7 @@ class BaseService {
       headers: this.createHeaders(),
     };
     if (headers) config.headers = { ...config.headers, ...headers };
-    return axios.delete(url, data);
+    return axios.delete(url, config);
   }
 }
 
