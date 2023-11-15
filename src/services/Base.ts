@@ -48,17 +48,15 @@ class BaseService {
             if (data && data.error) {
               message = `Request failed: ${data.error}`;
             } else if (data && data.errors && data.errors.length) {
-              const errors: any[] = data.errors;
-
               // check if we have a description for the error code
               // if not, use the error message from the server
               if (operation) {
-                const description = this.findErrorByCode(operation, errors[0].errorCode);
+                const description = this.findErrorByCode(operation, data.errors[0].errorCode);
                 if (description) message = description;
-                else message = `Request failed: ${errors[0].errorMessage}`;
+                else message = `Request failed: ${data.errors[0].errorMessage}`;
               } else {
                 // use the error message from the server
-                message = `Request failed: ${errors[0].errorMessage}`;
+                message = `Request failed: ${data.errors[0].errorMessage}`;
               }
             } else {
               message = 'Request failed';
