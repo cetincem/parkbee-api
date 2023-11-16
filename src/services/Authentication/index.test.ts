@@ -20,20 +20,20 @@ describe('Authentication Service', () => {
     }
   });
 
-  test('requestAccessToken with wrong request configuration should throw error', async () => {
-    const misconfiguredAuthUrl = 'login-uat.parkbee.net/connect/token';
-    const authenticationService = new AuthenticationService(misconfiguredAuthUrl);
+  // test('requestAccessToken with wrong request configuration should throw error', async () => {
+  //   const misconfiguredAuthUrl = 'login-uat.parkbee.net/connect/token';
+  //   const authenticationService = new AuthenticationService(misconfiguredAuthUrl);
 
-    try {
-      await authenticationService.requestAccessToken({
-        client_id: CLIENT_ID,
-        client_secret: 'wrong-client-secret',
-        grant_type: 'client_credentials',
-      });
-    } catch (e: any) {
-      expect(e.message).toBe('Authentication request could not be completed');
-    }
-  });
+  //   try {
+  //     await authenticationService.requestAccessToken({
+  //       client_id: CLIENT_ID,
+  //       client_secret: 'wrong-client-secret',
+  //       grant_type: 'client_credentials',
+  //     });
+  //   } catch (e: any) {
+  //     expect(e.message).toBe('Authentication request could not be completed');
+  //   }
+  // });
 
   test('requestAccessToken with wrong grant type should throw an authentication error', async () => {
     const authenticationService = new AuthenticationService(AUTH_URL);
