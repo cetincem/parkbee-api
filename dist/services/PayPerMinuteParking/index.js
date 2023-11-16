@@ -10,7 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Base_1 = require("../Base");
+const errors = require("./errors.json");
 class PayPerMinuteParkingService extends Base_1.default {
+    constructor(apiUrl, token) {
+        super(apiUrl, token);
+        this.errors = errors;
+    }
     startParkingTransaction(params) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.apiUrl}/parkingtransactions`;
@@ -19,7 +24,7 @@ class PayPerMinuteParkingService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, 'startParkingTransaction');
             }
         });
     }
@@ -31,7 +36,7 @@ class PayPerMinuteParkingService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, 'stopParkingTransaction');
             }
         });
     }
@@ -42,7 +47,7 @@ class PayPerMinuteParkingService extends Base_1.default {
                 yield this.sendPostRequest(url, params);
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, 'refundParkingTransaction');
             }
         });
     }
