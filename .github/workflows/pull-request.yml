@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check Environment Variables
+        run: echo "AUTH_URL is ${{ env.AUTH_URL }}"
+        
       - name: Checkout Repository
         uses: actions/checkout@v3
 
