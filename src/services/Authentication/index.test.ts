@@ -4,6 +4,8 @@ const AUTH_URL = process.env.AUTH_URL || '';
 const CLIENT_ID = process.env.PPM_CLIENT_ID || '';
 const CLIENT_SECRET = process.env.PPM_CLIENT_SECRET || '';
 
+console.log('AUTH_URL', AUTH_URL);
+
 describe('Authentication Service', () => {
   test('requestAccessToken with wrong authentication URL should throw error', async () => {
     const wrongAuthUrl = 'https://login-uat.parkbee.net/connect/token/invalid';
