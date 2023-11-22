@@ -11,17 +11,17 @@ jobs:
     steps:
       - name: Check API and AUTH URLs
         run: |
-          echo "AUTH_URL is ${{ github.AUTH_URL }}"
-          echo "API_URL is ${{ github.API_URL }}"
+          echo "AUTH_URL is ${{ vars.AUTH_URL }}"
+          echo "API_URL is ${{ vars.API_URL }}"
         
       - name: Create Environment Variables
         run: |
           touch .env.test
-          echo AUTH_URL=${{ github.AUTH_URL }} >> .env.test
-          echo API_URL=${{ github.API_URL }} >> .env.test
-          echo PPM_CLIENT_ID=${{ github.CLIENT_ID }} >> .env.test
+          echo AUTH_URL=${{ vars.AUTH_URL }} >> .env.test
+          echo API_URL=${{ vars.API_URL }} >> .env.test
+          echo PPM_CLIENT_ID=${{ vars.CLIENT_ID }} >> .env.test
           echo PPM_CLIENT_SECRET=${{ secrets.PPM_CLIENT_SECRET }} >> .env.test
-          echo PREPAID_CLIENT_ID=${{ github.PREPAID_CLIENT_ID }} >> .env.test
+          echo PREPAID_CLIENT_ID=${{ vars.PREPAID_CLIENT_ID }} >> .env.test
           echo PREPAID_CLIENT_SECRET=${{ secrets.PREPAID_CLIENT_SECRET }} >> .env.test
         
       - name: Checkout Repository
