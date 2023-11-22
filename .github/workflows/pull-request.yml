@@ -1,14 +1,28 @@
 name: Pull request
 
-on: pull_request
+on:
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Environment Variables
-        run: echo "AUTH_URL is ${{ env.AUTH_URL }}"
+      - name: Check API and AUTH URLs
+        run: |
+          echo "AUTH_URL is ${{ github.AUTH_URL }}"
+          echo "API_URL is ${{ github.API_URL }}"
+        
+      - name: Create Environment Variables
+        run: |
+          touch .env.test
+          echo AUTH_URL=${{ github.AUTH_URL }} >> .env.test
+          echo API_URL=${{ github.API_URL }} >> .env.test
+          echo PPM_CLIENT_ID=${{ github.CLIENT_ID }} >> .env.test
+          echo PPM_CLIENT_SECRET=${{ secrets.PPM_CLIENT_SECRET }} >> .env.test
+          echo PREPAID_CLIENT_ID=${{ github.PREPAID_CLIENT_ID }} >> .env.test
+          echo PREPAID_CLIENT_SECRET=${{ secrets.PREPAID_CLIENT_SECRET }} >> .env.test
         
       - name: Checkout Repository
         uses: actions/checkout@v3
