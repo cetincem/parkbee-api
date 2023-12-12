@@ -13,8 +13,14 @@ import {
   CalculatePriceResponse,
   CreateOverstayRecordResponse,
 } from "./types";
+import * as errors from "./errors.json";
 
 class PrepaidBookingsService extends BaseService {
+  constructor(apiUrl: string, token: string) {
+    super(apiUrl, token);
+    this.errors = errors;
+  }
+
   async createBooking(
     params: CreatePrepaidBookingParams
   ): Promise<CreatePrepaidBookingResponse> {
@@ -23,7 +29,7 @@ class PrepaidBookingsService extends BaseService {
       const response: AxiosResponse = await this.sendPostRequest(url, params);
       return response.data as CreatePrepaidBookingResponse;
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "createPrepaidBooking");
     }
   }
 
@@ -32,7 +38,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPutRequest(url, { paymentToken });
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "confirmPrepaidBooking");
     }
   }
 
@@ -53,7 +59,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendDeleteRequest(url);
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "cancelPrepaidBooking");
     }
   }
 
@@ -75,7 +81,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPostRequest(url, params);
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "startParkingAction");
     }
   }
 
@@ -88,7 +94,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPostRequest(url, params);
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "stopParkingAction");
     }
   }
 
@@ -97,11 +103,11 @@ class PrepaidBookingsService extends BaseService {
     accessSlotId: string,
     doorId: string
   ) {
-    const url = `${this.apiUrl}/bookings/${bookingId}/pedestrian_door/${doorId}`;
+    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/pedestrian_door/${doorId}`;
     try {
       await this.sendPostRequest(url);
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "openPedestrianDoor");
     }
   }
 
@@ -114,7 +120,7 @@ class PrepaidBookingsService extends BaseService {
       const res = await this.sendPostRequest(url, params);
       return res.data as CreateOverstayRecordResponse;
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "createOverstayRecord");
     }
   }
 
@@ -123,11 +129,11 @@ class PrepaidBookingsService extends BaseService {
     accessSlotId: string,
     overstayId: string
   ) {
-    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays/${overstayId}/confirm`;
+    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/overstays/${overstayId}/confirm`;
     try {
       await this.sendPostRequest(url);
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "confirmOverstayRecord");
     }
   }
 

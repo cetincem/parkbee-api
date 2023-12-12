@@ -38,12 +38,14 @@ class BaseService {
 
         switch (error.response.status) {
           case 404:
-            message = 'Not found';
+            message = "Not found";
             break;
           case 401:
-            message = 'Unauthorized';
+            message = "Unauthorized";
             break;
-          case 400:
+          // make sure to add all the error codes that we want to handle
+          // case 400:
+          default:
             const data: any = error.response.data;
             if (data && data.error) {
               message = `Request failed: ${data.error}`;
@@ -51,7 +53,10 @@ class BaseService {
               // check if we have a description for the error code
               // if not, use the error message from the server
               if (operation) {
-                const description = this.findErrorByCode(operation, data.errors[0].errorCode);
+                const description = this.findErrorByCode(
+                  operation,
+                  data.errors[0].errorCode
+                );
                 if (description) message = description;
                 else message = `Request failed: ${data.errors[0].errorMessage}`;
               } else {
@@ -59,12 +64,12 @@ class BaseService {
                 message = `Request failed: ${data.errors[0].errorMessage}`;
               }
             } else {
-              message = 'Request failed';
+              message = "Request failed";
             }
             break;
-          default:
-            message = 'Request failed with unknown reason';
-            break;
+          // default:
+          //   message = "Request failed with unknown reason";
+          //   break;
         }
       } else if (error.request) {
         // request was made but no response was received
