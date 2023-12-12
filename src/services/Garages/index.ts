@@ -14,8 +14,14 @@ import {
   CalculatePriceParams,
   GetGarageDoorsResponse,
 } from "./types";
+import * as errors from "./errors.json";
 
 class GaragesService extends BaseService {
+  constructor(apiUrl: string, token: string) {
+    super(apiUrl, token);
+    this.errors = errors;
+  }
+
   async getGaragesList(
     params?: GetGaragesListItem
   ): Promise<GetGaragesListItem[]> {
@@ -125,13 +131,13 @@ class GaragesService extends BaseService {
   async openGarageDoor(
     garageId: string,
     doorId: string,
-    registrationNumber: string
+    registrationNumber?: string
   ): Promise<void> {
     const url = `${this.apiUrl}/garages/${garageId}/doors/${doorId}/open`;
     try {
       await this.sendPostRequest(url, { registrationNumber });
     } catch (err) {
-      throw this.handleError(err);
+      throw this.handleError(err, "openGarageDoor");
     }
   }
 }

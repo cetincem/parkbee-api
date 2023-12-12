@@ -33,13 +33,41 @@ class AuthenticationService {
         });
     }
     handleAuthError(err) {
-        var _a;
+        let message;
+        // Check if the error is an Axios error
         if (axios_1.default.isAxiosError(err)) {
             const error = err;
-            return (_a = error.response) === null || _a === void 0 ? void 0 : _a.data;
+            if (error.response) {
+                // request was made and server responded with a status code
+                switch (error.response.status) {
+                    case 404: // url not found
+                        message = 'Authentication URL not found';
+                        break;
+                    default:
+                        const data = error.response.data;
+                        if (data && data.error) {
+                            message = `Authentication failed: ${data.error}`;
+                        }
+                        else {
+                            message = 'Authentication failed';
+                        }
+                        break;
+                }
+            }
+            else if (error.request) {
+                // request was made but no response was received
+                message = 'Authentication request could not be completed';
+            }
+            else {
+                // config error
+                message = 'Authentication request is invalid';
+            }
         }
-        else
-            return new Error('Authentication failed');
+        else {
+            // other error
+            message = 'Authentication request could not be completed';
+        }
+        throw new Error(message);
     }
 }
 exports.default = AuthenticationService;

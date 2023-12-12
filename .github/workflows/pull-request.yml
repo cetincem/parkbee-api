@@ -1,0 +1,47 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check API and AUTH URLs
+        run: |
+          echo "AUTH_URL is ${{ vars.AUTH_URL }}"
+          echo "API_URL is ${{ vars.API_URL }}"
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Create Environment Variables
+        run: |
+          pwd
+          touch .env.test
+          echo AUTH_URL=${{ vars.AUTH_URL }} >> .env.test
+          echo API_URL=${{ vars.API_URL }} >> .env.test
+          echo PPM_CLIENT_ID=${{ vars.PPM_CLIENT_ID }} >> .env.test
+          echo PPM_CLIENT_SECRET=${{ secrets.PPM_CLIENT_SECRET }} >> .env.test
+          echo PREPAID_CLIENT_ID=${{ vars.PREPAID_CLIENT_ID }} >> .env.test
+          echo PREPAID_CLIENT_SECRET=${{ secrets.PREPAID_CLIENT_SECRET }} >> .env.test
+
+      - name: Cat Environment Variables
+        run: |
+          cat .env.test
+
+      - name: Test
+        run: npm run test

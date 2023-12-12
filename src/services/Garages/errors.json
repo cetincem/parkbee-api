@@ -1,0 +1,8 @@
+{
+  "openGarageDoor": [
+    {
+      "code": "service_unavailable",
+      "description": "Currently the requested door is not reachable."
+    }
+  ]
+}

@@ -1,10 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 
-import { CreateUserParams, CreateUserResponse, SearchUsersParams, SearchUsersResponse } from "./types";
+import {
+  CreateUserParams,
+  CreateUserResponse,
+  SearchUsersParams,
+  SearchUsersResponse,
+} from "./types";
 import BaseService from "../Base";
 
 class UsersService extends BaseService {
-
   async searchUsers(params?: SearchUsersParams): Promise<SearchUsersResponse> {
     const url = `${this.apiUrl}/external_users`;
     try {
@@ -14,7 +18,7 @@ class UsersService extends BaseService {
       throw this.handleError(err);
     }
   }
-  
+
   async createUser(params: CreateUserParams): Promise<CreateUserResponse> {
     const url = `${this.apiUrl}/external_users`;
 

@@ -1,0 +1,51 @@
+{
+  "startParkingTransaction": [
+    {
+      "code": "operation_timeout",
+      "description": "The operation cancellation has occurred due to timeout."
+    },
+    {
+      "code": "service_unavailable",
+      "description": "Currently the entry door is not reachable."
+    },
+    {
+      "code": "garage_closed",
+      "description": "The garage is currently closed."
+    },
+    {
+      "code": "user_blacklisted",
+      "description": "The user is blocked in Parkbee system."
+    },
+    {
+      "code": "garage_full",
+      "description": "All spaces are currently occupied or reserved for other customers."
+    },
+    {
+      "code": "garage_suspended",
+      "description": "Garage is temporarily suspended."
+    },
+    {
+      "code": "garage_does_not_exist",
+      "description": "GarageId is not known."
+    },
+    {
+      "code": "payperminute_transactions_not_allowed",
+      "description": "Pay per minute transactions not allowed for the garage."
+    },
+    {
+      "code": "door_indication_required",
+      "description": "This garage has multiple entry doors, you need to specify the doorId."
+    }
+  ],
+  "stopParkingTransaction": [
+    {
+      "code": "invalid_operation",
+      "description": "Cannot close a transaction which is not started."
+    },
+    {
+      "code": "service_unavailable",
+      "description": "Cannot close a transaction which is not started."
+    }
+  ],
+  "refundParkingTransaction": []
+}

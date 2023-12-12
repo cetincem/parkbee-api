@@ -8,9 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Base_1 = require("../Base");
+const errors = require("./errors.json");
 class PrepaidBookingsService extends Base_1.default {
+    constructor(apiUrl, token) {
+        super(apiUrl, token);
+        this.errors = errors;
+    }
     createBooking(params) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.apiUrl}/bookings`;
@@ -19,7 +35,7 @@ class PrepaidBookingsService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, "createPrepaidBooking");
             }
         });
     }
@@ -30,7 +46,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPutRequest(url, { paymentToken });
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, "confirmPrepaidBooking");
             }
         });
     }
@@ -53,7 +69,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendDeleteRequest(url);
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, "cancelPrepaidBooking");
             }
         });
     }
@@ -75,7 +91,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPostRequest(url, params);
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, "startParkingAction");
             }
         });
     }
@@ -86,18 +102,18 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPostRequest(url, params);
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, "stopParkingAction");
             }
         });
     }
     openPedestrianDoor(bookingId, accessSlotId, doorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `${this.apiUrl}/bookings/${bookingId}/pedestrian_door/${doorId}`;
+            const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/pedestrian_door/${doorId}`;
             try {
                 yield this.sendPostRequest(url);
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, "openPedestrianDoor");
             }
         });
     }
@@ -105,18 +121,32 @@ class PrepaidBookingsService extends Base_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays`;
             try {
-                yield this.sendPostRequest(url, params);
+                const res = yield this.sendPostRequest(url, params);
+                return res.data;
             }
             catch (err) {
-                throw this.handleError(err);
+                throw this.handleError(err, "createOverstayRecord");
             }
         });
     }
     confirmOverstayRecord(bookingId, accessSlotId, overstayId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays/${overstayId}/confirm`;
+            const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/overstays/${overstayId}/confirm`;
             try {
                 yield this.sendPostRequest(url);
+            }
+            catch (err) {
+                throw this.handleError(err, "confirmOverstayRecord");
+            }
+        });
+    }
+    calculatePrice(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { garageId } = params, otherParams = __rest(params, ["garageId"]);
+            const url = `${this.apiUrl}/garages/${garageId}/pricing/calculate`;
+            try {
+                const response = yield this.sendPostRequest(url, otherParams);
+                return response.data;
             }
             catch (err) {
                 throw this.handleError(err);

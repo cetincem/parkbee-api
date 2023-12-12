@@ -49,3 +49,19 @@ export interface StopParkingActionParams {
 export interface CreateOverstayRecordParams {
     redirectUrl?: string;
 }
+export interface CreateOverstayRecordResponse {
+    overstayId: string;
+    amount: number;
+    paymentUrl: string;
+}
+export interface CalculatePriceParams {
+    garageId: string;
+    discountCode?: string;
+    startTime: string;
+    endTime: string;
+}
+export interface CalculatePriceResponse {
+    cost: number;
+    discountAmount: number;
+    total: number;
+}

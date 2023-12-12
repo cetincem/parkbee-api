@@ -1,0 +1,178 @@
+{
+    "createPrepaidBooking": [
+        {
+            "code": "business_rule_violation",
+            "description": "Booking should have at least one access slot."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "Booking amount cannot be 0."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "Only one access slot is supported per booking."
+        },
+        {
+            "code": "user_not_found",
+            "description": "User not found."
+        },
+        {
+            "code": "user_blacklisted",
+            "description": "This user is blacklisted."
+        },
+        {
+            "code": "payment_url_required",
+            "description": "As a booking-partner, you are required to provide a payment URL."
+        },
+        {
+            "code": "validation_error",
+            "description": "Registration number is required."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "Entry time must be in the future."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "End time must be later than start time."
+        },
+        {
+            "code": "resource_not_found",
+            "description": "Garage not found."
+        },
+        {
+            "code": "garage_full",
+            "description": "There is no available space in this garage."
+        },
+        {
+            "code": "bookings_not_allowed",
+            "description": "This garage does not allow bookings."
+        }
+    ],
+    "confirmPrepaidBooking": [
+        {
+            "code": "resource_not_found",
+            "description": "Booking is not found."
+        },
+        {
+            "code": "booking_expired",
+            "description": "Booking has been expired."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "Booking has already been confirmed."
+        },
+        {
+            "code": "booking_cancelled",
+            "description": "Booking is cancelled."
+        }
+    ],
+    "cancelPrepaidBooking": [
+        {
+            "code": "resource_not_found",
+            "description": "Booking is not found."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "Only successfully paid bookings can be cancelled."
+        },
+        {
+            "code": "booking_expired",
+            "description": "Booking has been expired."
+        },
+        {
+            "code": "booking_cancelled",
+            "description": "Booking has been already cancelled."
+        },
+        {
+            "code": "outside_cancellation_policy",
+            "description": "Booking is outside the cancellation period."
+        }
+    ],
+    "startParkingAction": [
+        {
+            "code": "service_unavailable",
+            "description": "Currently the requested door is not reachable."
+        },
+        {
+            "code": "resource_not_found",
+            "description": "Booking does not exist."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "Booking has not been confirmed."
+        },
+        {
+            "code": "booking_not_active_yet",
+            "description": "Booking is not active yet."
+        },
+        {
+            "code": "booking_ended",
+            "description": "Booking is already ended."
+        },
+        {
+            "code": "parking_action_already_started",
+            "description": "There is already a parking action running for this booking."
+        },
+        {
+            "code": "allowed_daily_booking_usage_limit_reached",
+            "description": "Max daily access limit has been reached for this booking."
+        }
+    ],
+    "stopParkingAction": [
+        {
+            "code": "service_unavailable",
+            "description": "Currently the requested door is not reachable."
+        },
+        {
+            "code": "resource_not_found",
+            "description": "Booking does not exist."
+        },
+        {
+            "code": "no_active_parking_action",
+            "description": "There is no running parking action for this booking."
+        },
+        {
+            "code": "overstay_payment_required",
+            "description": "The user has stayed too long. Please create an overstay record and ensure it's paid."
+        }
+    ],
+    "openPedestrianDoor": [
+        {
+            "code": "service_unavailable",
+            "description": "Currently the requested door is not reachable."
+        },
+        {
+            "code": "business_rule_violation",
+            "description": "There is no running parking action for booking"
+        }
+    ],
+    "createOverstayRecord": [
+        {
+            "code": "resource_not_found",
+            "description": "Booking does not exist."
+        },
+        {
+            "code": "no_active_parking_action",
+            "description": "Can't create overstay for booking, no active transactions found"
+        },
+        {
+            "code": "booking_within_retention_period",
+            "description": "Can't create overstay for booking, booking is within retention period"
+        }
+    ],
+    "confirmOverstayRecord": [
+        {
+            "code": "resource_not_found",
+            "description": "Overstay record does not exist."
+        },
+        {
+            "code": "no_active_parking_action",
+            "description": "Can't create overstay for booking, no active transactions found"
+        },
+        {
+            "code": "booking_within_retention_period",
+            "description": "Can't create overstay for booking, booking is within retention period"
+        }
+    ]
+}
