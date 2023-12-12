@@ -24,7 +24,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -36,7 +36,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -48,7 +48,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -60,7 +60,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -72,7 +72,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -84,7 +84,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -96,7 +96,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -108,7 +108,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -120,7 +120,7 @@ class GaragesService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -131,7 +131,7 @@ class GaragesService extends Base_1.default {
                 yield this.sendPostRequest(url, { registrationNumber });
             }
             catch (err) {
-                this.handleError(err, "openGarageDoor");
+                throw this.handleError(err, "openGarageDoor");
             }
         });
     }

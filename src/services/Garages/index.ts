@@ -24,111 +24,107 @@ class GaragesService extends BaseService {
 
   async getGaragesList(
     params?: GetGaragesListItem
-  ): Promise<GetGaragesListItem[] | undefined> {
+  ): Promise<GetGaragesListItem[]> {
     const url = `${this.apiUrl}/garages`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url, params);
       return response.data as GetGaragesListItem[];
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
-  async getGarageDetails(
-    garageId: string
-  ): Promise<GetGarageDetailsResponse | undefined> {
+  async getGarageDetails(garageId: string): Promise<GetGarageDetailsResponse> {
     const url = `${this.apiUrl}/garages/${garageId}`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url);
       return response.data as GetGarageDetailsResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
   async getGarageAmenities(
     garageId: string
-  ): Promise<GetGarageAmenitiesResponse | undefined> {
+  ): Promise<GetGarageAmenitiesResponse> {
     const url = `${this.apiUrl}/garages/${garageId}/amenities`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url);
       return response.data as GetGarageAmenitiesResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
   async getGarageOpeningHours(
     garageId: string
-  ): Promise<GetGarageOpeningHoursResponse | undefined> {
+  ): Promise<GetGarageOpeningHoursResponse> {
     const url = `${this.apiUrl}/garages/${garageId}/openinghours`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url);
       return response.data as GetGarageOpeningHoursResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
   async getGarageAvailability(
     garageId: string,
     query: GetGarageAvailabilityParams
-  ): Promise<GetGarageAvailabilityResponse | undefined> {
+  ): Promise<GetGarageAvailabilityResponse> {
     const url = `${this.apiUrl}/garages/${garageId}/availability`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url, query);
       return response.data as GetGarageAvailabilityResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
   async getGaragesAvailability(
     query: getGaragesAvailabilityParams
-  ): Promise<GetGaragesAvailabilityResponse | undefined> {
+  ): Promise<GetGaragesAvailabilityResponse> {
     const url = `${this.apiUrl}/garages/availability`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url, query);
       return response.data as GetGaragesAvailabilityResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
   async getGaragePricingScheme(
     garageId: string
-  ): Promise<GetGaragePricingSchemeResponse | undefined> {
+  ): Promise<GetGaragePricingSchemeResponse> {
     const url = `${this.apiUrl}/garages/${garageId}/pricing`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url);
       return response.data as GetGaragePricingSchemeResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
   async calculatePrice(
     garageId: string,
     params: CalculatePriceParams
-  ): Promise<CalculatePriceResponse | undefined> {
+  ): Promise<CalculatePriceResponse> {
     const url = `${this.apiUrl}/garages/${garageId}/pricing/calculate`;
     try {
       const response: AxiosResponse = await this.sendPostRequest(url, params);
       return response.data as CalculatePriceResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
-  async getGarageDoors(
-    garageId: string
-  ): Promise<GetGarageDoorsResponse | undefined> {
+  async getGarageDoors(garageId: string): Promise<GetGarageDoorsResponse> {
     const url = `${this.apiUrl}/garages/${garageId}/doors`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url);
       return response.data as GetGarageDoorsResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
@@ -141,7 +137,7 @@ class GaragesService extends BaseService {
     try {
       await this.sendPostRequest(url, { registrationNumber });
     } catch (err) {
-      this.handleError(err, "openGarageDoor");
+      throw this.handleError(err, "openGarageDoor");
     }
   }
 }

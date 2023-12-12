@@ -23,13 +23,13 @@ class PrepaidBookingsService extends BaseService {
 
   async createBooking(
     params: CreatePrepaidBookingParams
-  ): Promise<CreatePrepaidBookingResponse | undefined> {
+  ): Promise<CreatePrepaidBookingResponse> {
     const url = `${this.apiUrl}/bookings`;
     try {
       const response: AxiosResponse = await this.sendPostRequest(url, params);
       return response.data as CreatePrepaidBookingResponse;
     } catch (err) {
-      this.handleError(err, "createPrepaidBooking");
+      throw this.handleError(err, "createPrepaidBooking");
     }
   }
 
@@ -38,19 +38,19 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPutRequest(url, { paymentToken });
     } catch (err) {
-      this.handleError(err, "confirmPrepaidBooking");
+      throw this.handleError(err, "confirmPrepaidBooking");
     }
   }
 
   async getBookingDetails(
     bookingId: string
-  ): Promise<GetBookingDetailsResponse | undefined> {
+  ): Promise<GetBookingDetailsResponse> {
     const url = `${this.apiUrl}/bookings/${bookingId}`;
     try {
       const response: AxiosResponse = await this.sendGetRequest(url);
       return response.data as GetBookingDetailsResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
@@ -59,7 +59,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendDeleteRequest(url);
     } catch (err) {
-      this.handleError(err, "cancelPrepaidBooking");
+      throw this.handleError(err, "cancelPrepaidBooking");
     }
   }
 
@@ -68,7 +68,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPostRequest(url, params);
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 
@@ -81,7 +81,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPostRequest(url, params);
     } catch (err) {
-      this.handleError(err, "startParkingAction");
+      throw this.handleError(err, "startParkingAction");
     }
   }
 
@@ -94,7 +94,7 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPostRequest(url, params);
     } catch (err) {
-      this.handleError(err, "stopParkingAction");
+      throw this.handleError(err, "stopParkingAction");
     }
   }
 
@@ -107,20 +107,20 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPostRequest(url);
     } catch (err) {
-      this.handleError(err, "openPedestrianDoor");
+      throw this.handleError(err, "openPedestrianDoor");
     }
   }
 
   async createOverstayRecord(
     bookingId: string,
     params?: CreateOverstayRecordParams
-  ): Promise<CreateOverstayRecordResponse | undefined> {
+  ): Promise<CreateOverstayRecordResponse> {
     const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays`;
     try {
       const res = await this.sendPostRequest(url, params);
       return res.data as CreateOverstayRecordResponse;
     } catch (err) {
-      this.handleError(err, "createOverstayRecord");
+      throw this.handleError(err, "createOverstayRecord");
     }
   }
 
@@ -133,13 +133,13 @@ class PrepaidBookingsService extends BaseService {
     try {
       await this.sendPostRequest(url);
     } catch (err) {
-      this.handleError(err, "confirmOverstayRecord");
+      throw this.handleError(err, "confirmOverstayRecord");
     }
   }
 
   async calculatePrice(
     params: CalculatePriceParams
-  ): Promise<CalculatePriceResponse | undefined> {
+  ): Promise<CalculatePriceResponse> {
     const { garageId, ...otherParams } = params;
 
     const url = `${this.apiUrl}/garages/${garageId}/pricing/calculate`;
@@ -147,7 +147,7 @@ class PrepaidBookingsService extends BaseService {
       const response = await this.sendPostRequest(url, otherParams);
       return response.data as CalculatePriceResponse;
     } catch (err) {
-      this.handleError(err);
+      throw this.handleError(err);
     }
   }
 }

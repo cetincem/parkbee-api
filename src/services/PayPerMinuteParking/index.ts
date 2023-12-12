@@ -18,26 +18,26 @@ class PayPerMinuteParkingService extends BaseService {
 
   async startParkingTransaction(
     params: StartParkingTransactionParams
-  ): Promise<StartParkingTransactionResponse | undefined> {
+  ): Promise<StartParkingTransactionResponse> {
     const url = `${this.apiUrl}/parkingtransactions`;
     try {
       const response: AxiosResponse = await this.sendPostRequest(url, params);
       return response.data as StartParkingTransactionResponse;
     } catch (err) {
-      this.handleError(err, "startParkingTransaction");
+      throw this.handleError(err, "startParkingTransaction");
     }
   }
 
   async stopParkingTransaction(
     transactionId: string,
     params: StopParkingTransactionParams
-  ): Promise<StopParkingTransactionResponse | undefined> {
+  ): Promise<StopParkingTransactionResponse> {
     const url = `${this.apiUrl}/parkingtransactions/${transactionId}/stop`;
     try {
       const response: AxiosResponse = await this.sendPostRequest(url, params);
       return response.data as StopParkingTransactionResponse;
     } catch (err) {
-      this.handleError(err, "stopParkingTransaction");
+      throw this.handleError(err, "stopParkingTransaction");
     }
   }
 
@@ -49,7 +49,7 @@ class PayPerMinuteParkingService extends BaseService {
     try {
       await this.sendPostRequest(url, params);
     } catch (err) {
-      this.handleError(err, "refundParkingTransaction");
+      throw this.handleError(err, "refundParkingTransaction");
     }
   }
 }

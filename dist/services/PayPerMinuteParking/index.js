@@ -24,7 +24,7 @@ class PayPerMinuteParkingService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err, "startParkingTransaction");
+                throw this.handleError(err, "startParkingTransaction");
             }
         });
     }
@@ -36,7 +36,7 @@ class PayPerMinuteParkingService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err, "stopParkingTransaction");
+                throw this.handleError(err, "stopParkingTransaction");
             }
         });
     }
@@ -47,7 +47,7 @@ class PayPerMinuteParkingService extends Base_1.default {
                 yield this.sendPostRequest(url, params);
             }
             catch (err) {
-                this.handleError(err, "refundParkingTransaction");
+                throw this.handleError(err, "refundParkingTransaction");
             }
         });
     }

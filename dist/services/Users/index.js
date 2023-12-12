@@ -19,7 +19,7 @@ class UsersService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -31,7 +31,7 @@ class UsersService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }

@@ -35,7 +35,7 @@ class PrepaidBookingsService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err, "createPrepaidBooking");
+                throw this.handleError(err, "createPrepaidBooking");
             }
         });
     }
@@ -46,7 +46,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPutRequest(url, { paymentToken });
             }
             catch (err) {
-                this.handleError(err, "confirmPrepaidBooking");
+                throw this.handleError(err, "confirmPrepaidBooking");
             }
         });
     }
@@ -58,7 +58,7 @@ class PrepaidBookingsService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -69,7 +69,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendDeleteRequest(url);
             }
             catch (err) {
-                this.handleError(err, "cancelPrepaidBooking");
+                throw this.handleError(err, "cancelPrepaidBooking");
             }
         });
     }
@@ -80,7 +80,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPostRequest(url, params);
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
@@ -91,7 +91,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPostRequest(url, params);
             }
             catch (err) {
-                this.handleError(err, "startParkingAction");
+                throw this.handleError(err, "startParkingAction");
             }
         });
     }
@@ -102,7 +102,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPostRequest(url, params);
             }
             catch (err) {
-                this.handleError(err, "stopParkingAction");
+                throw this.handleError(err, "stopParkingAction");
             }
         });
     }
@@ -113,7 +113,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPostRequest(url);
             }
             catch (err) {
-                this.handleError(err, "openPedestrianDoor");
+                throw this.handleError(err, "openPedestrianDoor");
             }
         });
     }
@@ -125,7 +125,7 @@ class PrepaidBookingsService extends Base_1.default {
                 return res.data;
             }
             catch (err) {
-                this.handleError(err, "createOverstayRecord");
+                throw this.handleError(err, "createOverstayRecord");
             }
         });
     }
@@ -136,7 +136,7 @@ class PrepaidBookingsService extends Base_1.default {
                 yield this.sendPostRequest(url);
             }
             catch (err) {
-                this.handleError(err, "confirmOverstayRecord");
+                throw this.handleError(err, "confirmOverstayRecord");
             }
         });
     }
@@ -149,7 +149,7 @@ class PrepaidBookingsService extends Base_1.default {
                 return response.data;
             }
             catch (err) {
-                this.handleError(err);
+                throw this.handleError(err);
             }
         });
     }
