@@ -12,7 +12,7 @@ declare class BaseService {
     constructor(apiUrl: string, token: string);
     createHeaders(): {
         Authorization: string;
-        'Content-Type': string;
+        "Content-Type": string;
     };
     handleError(err: any, operation?: string): void;
     private findErrorByCode;

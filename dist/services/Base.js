@@ -8,63 +8,60 @@ class BaseService {
     }
     createHeaders() {
         return {
-            'Authorization': `Bearer ${this.accessToken}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.accessToken}`,
+            "Content-Type": "application/json",
         };
     }
     handleError(err, operation) {
-        let message = 'undefined';
-        // Check if the error is an Axios error
-        if (axios_1.default.isAxiosError(err)) {
-            const error = err;
-            if (error.response) {
-                // request was made and server responded with a status code
-                switch (error.response.status) {
-                    case 404:
-                        message = 'Not found';
-                        break;
-                    case 401:
-                        message = 'Unauthorized';
-                        break;
-                    case 400:
-                        const data = error.response.data;
-                        if (data && data.error) {
-                            message = `Request failed: ${data.error}`;
-                        }
-                        else if (data && data.errors && data.errors.length) {
-                            // check if we have a description for the error code
-                            // if not, use the error message from the server
-                            if (operation) {
-                                const description = this.findErrorByCode(operation, data.errors[0].errorCode);
-                                if (description)
-                                    message = description;
-                                else
-                                    message = `Request failed: ${data.errors[0].errorMessage}`;
-                            }
-                            else {
-                                // use the error message from the server
+        let message = "undefined";
+        const error = err;
+        if (error.response) {
+            // request was made and server responded with a status code
+            switch (error.response.status) {
+                case 404:
+                    message = "Not found";
+                    break;
+                case 401:
+                    message = "Unauthorized";
+                    break;
+                case 400:
+                    const data = error.response.data;
+                    if (data && data.error) {
+                        message = `Request failed: ${data.error}`;
+                    }
+                    else if (data && data.errors && data.errors.length) {
+                        // check if we have a description for the error code
+                        // if not, use the error message from the server
+                        if (operation) {
+                            const description = this.findErrorByCode(operation, data.errors[0].errorCode);
+                            if (description)
+                                message = description;
+                            else
                                 message = `Request failed: ${data.errors[0].errorMessage}`;
-                            }
                         }
                         else {
-                            message = 'Request failed';
+                            // use the error message from the server
+                            message = `Request failed: ${data.errors[0].errorMessage}`;
                         }
-                        break;
-                    default:
-                        message = 'Request failed with unknown reason';
-                        break;
-                }
-            }
-            else if (error.request) {
-                // request was made but no response was received
-                message = 'Request could not be completed';
-            }
-            else {
-                // config error
-                message = 'Request is invalid';
+                    }
+                    else {
+                        message = "Request failed";
+                    }
+                    break;
+                default:
+                    message = "Request failed with unknown reason";
+                    break;
             }
         }
-        throw new Error(message);
+        else if (error.request) {
+            // request was made but no response was received
+            message = "Request could not be completed";
+        }
+        else {
+            // config error
+            message = "Request is invalid";
+        }
+        throw message;
     }
     findErrorByCode(operation, errorCode) {
         if (!this.errors)
@@ -86,7 +83,6 @@ class BaseService {
             config.headers = Object.assign(Object.assign({}, config.headers), headers);
         return axios_1.default.get(url, config);
     }
-    ;
     sendPostRequest(url, data, headers) {
         const config = {
             headers: this.createHeaders(),
