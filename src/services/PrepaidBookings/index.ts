@@ -113,9 +113,10 @@ class PrepaidBookingsService extends BaseService {
 
   async createOverstayRecord(
     bookingId: string,
+    accessSlotId: string,
     params?: CreateOverstayRecordParams
   ): Promise<CreateOverstayRecordResponse> {
-    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/overstays`;
+    const url = `${this.apiUrl}/bookings/${bookingId}/access_slots/${accessSlotId}/overstays`;
     try {
       const res = await this.sendPostRequest(url, params);
       return res.data as CreateOverstayRecordResponse;
